@@ -1,8 +1,6 @@
 const debug = true;
 
-d = (msg) => {
-  console.log(`[${getTime()}] ${msg}`);
-}
+d = (msg) => { console.log(`[${getTime()}] ${msg}`) }
 //express
 const express = require('express');
 const app = express();
@@ -31,7 +29,14 @@ app.get('/hello', (req, res) => {
   res.send({ message: 'Connected to server' });
 });
 
-app.post('/createproject', (req, res) => {
+app.get('/search', (req, res) => {
+  res.send({ message: 'Search not yet implemented' });
+})
+
+app.get('/project/:projectId', (req, res) => {
+  res.send({ message: 'Project pages not yet implemented' });
+})
+app.post('/create', (req, res) => {
   const test = new Project ({
     name: 'Test',
   });

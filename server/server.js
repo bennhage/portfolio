@@ -37,6 +37,7 @@ app.post('/createproject', (req, res) => {
   });
   test.save((error, document) => {
     if (error) console.error(error);
+    else res.send({ message: 'OK'});
     console.log(document);
   });
 });

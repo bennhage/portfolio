@@ -10,11 +10,14 @@ class App extends Component {
     }
   }
   componentDidMount() {
-    this.callAPI()
+    this.verifyServerConnection()
       .then(res => console.log(res.message))
       .catch(err => console.log(err));
   }
-  callAPI = async () => {
+
+
+  // API calls
+  verifyServerConnection = async () => {
     const response = await fetch('/api/hello');
     const body = await response.json();
 
@@ -23,19 +26,20 @@ class App extends Component {
     }
     return body;
   }
-
+  post = async (url, data) => {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    });
+  }
+  
   render(){
     return(
       <div className="App">
         <h1>Lul</h1>
-        <button onClick={
-            () => {fetch('/api/createproject', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({message: 'hej'})
-            })}}>POST</button>
       </div>
     );
   }

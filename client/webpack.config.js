@@ -3,7 +3,7 @@ const webpack = require("webpack");
 
 module.exports = {
   devtool: 'inline-source-map',
-  entry: "./src/index.js",
+  entry: ['babel-polyfill', "./src/index.js"],
   mode: "development",
   module: {
     rules: [
@@ -28,6 +28,14 @@ module.exports = {
   devServer: {
     contentBase: path.join(__dirname, "public/"),
     port: 3000,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:5000',
+        pathRewrite: {'^/api' : ''},
+        secure: false,
+        changeOrigin: true
+      }
+    },
     publicPath: "http://localhost:3000/dist/",
     hotOnly: true
   },
